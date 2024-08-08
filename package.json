@@ -22,9 +22,12 @@
 		"@openzeppelin/contracts": "5.0.2"
 	},
 	"devDependencies": {
-		"@nomicfoundation/hardhat-toolbox": "^5.0.0",
+		"@nomicfoundation/hardhat-chai-matchers": "^2.0.7",
+		"@nomicfoundation/hardhat-ethers": "^3.0.6",
+		"@nomicfoundation/hardhat-verify": "^2.0.9",
 		"@nomiclabs/hardhat-solhint": "^3.0.1",
 		"@openzeppelin/test-helpers": "^0.5.16",
+		"@typechain/hardhat": "^9.1.0",
 		"@types/node": "^20.0.0",
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
@@ -32,13 +35,15 @@
 		"eslint": "^8.53.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.1",
-		"ethers": "^6.8.1",
+		"ethers": "^6.13.2",
 		"hardhat": "^2.19.0",
-		"hardhat-deploy": "^0.12.0",
+		"hardhat-deploy": "^0.12.4",
+		"hardhat-deploy-ethers": "^0.4.2",
+		"hardhat-gas-reporter": "^2.2.0",
 		"prettier": "^3.0.3",
 		"prettier-plugin-solidity": "^1.2.0",
 		"solhint": "^5.0.0",
-		"solidity-coverage": "^0.8.5",
+		"solidity-coverage": "^0.8.12",
 		"typescript": "^5.2.2"
 	}
 }

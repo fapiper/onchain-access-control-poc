@@ -11,5 +11,4 @@
 		"skipDefaultLibCheck": true
 	},
 	"include": ["./test", "./typechain-types", "./deploy", "./types.d.ts"],
-	"files": ["./hardhat.config.ts"]
 }

@@ -1,11 +1,15 @@
-import "@nomicfoundation/hardhat-toolbox"
-
 import { HardhatUserConfig } from "hardhat/config"
-
-import "hardhat-deploy"
-import "@nomiclabs/hardhat-solhint"
-import "hardhat-deploy"
+import "@nomicfoundation/hardhat-chai-matchers"
+import "@nomicfoundation/hardhat-ethers"
+import "@typechain/hardhat"
+import "hardhat-gas-reporter"
 import "solidity-coverage"
+import "@nomiclabs/hardhat-solhint"
+import "@nomicfoundation/hardhat-verify"
+
+import "@nomicfoundation/hardhat-ethers"
+import "hardhat-deploy"
+import "hardhat-deploy-ethers"
 
 import "dotenv/config"
 
