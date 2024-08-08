@@ -1,0 +1,40 @@
+### IntelliJ IDEA ###
+.idea
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+# Hardhat files
+cache
+artifacts
+
+# Depyloments
+## Ucomment if you want to save deployments
+deployments/*
+!deployments/.gitkeep
+
+# Deps
+node_modules
+
+
+# Dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Logs
+logs
+*.log
+.pnpm-debug.log*
+
+### Custom ###
+
+coverage
+coverage.json
+typechain
+typechain-types
