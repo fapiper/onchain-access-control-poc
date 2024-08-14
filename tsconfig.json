@@ -10,9 +10,14 @@
 		"resolveJsonModule": true,
 		"skipDefaultLibCheck": true,
         "paths": {
-          "@/*": ["*"]
+          "@/*": ["./*"]
         }
     },
-	"include": ["./contracts", "./typechain-types", "./types.d.ts"],
-	"files": ["./hardhat.config.ts"]
+  "exclude": ["node_modules"],
+  "include": [
+      "**/*.ts",
+      "**/*.d.ts",
+      ".eslintrc.json",
+      "artifacts/contracts/**/*.json",
+    ]
 }

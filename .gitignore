@@ -32,6 +32,9 @@ logs
 *.log
 .pnpm-debug.log*
 
+# Python
+venv
+
 ### Custom ###
 
 coverage

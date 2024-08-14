@@ -4,4 +4,4 @@ node_modules
 .env
 .idea
 typechain-types
-coverage
+coverage/.venv/
