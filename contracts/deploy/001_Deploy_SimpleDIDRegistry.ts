@@ -1,12 +1,10 @@
-import { simpleDeploy } from "@/contracts/utils/simpleDeploy"
+import { deploy, localDidEip155 } from "@/contracts/utils"
 
-export default simpleDeploy("SimpleDIDRegistry", async function (hre) {
+export default deploy("SimpleDIDRegistry", async function (hre) {
 	const { deployer } = await hre.getNamedAccounts()
-	const chainId = await hre.getChainId()
-	const initialDIDs = {
-		[hre.ethers.id(`did:pkh:eip155:${chainId}:${deployer}`)]: deployer,
-	}
+	const didHash = await localDidEip155(hre, "deployer").then(hre.ethers.id)
+
 	return {
-		args: [Object.keys(initialDIDs), Object.values(initialDIDs)],
+		args: [[didHash], [deployer]],
 	}
 })

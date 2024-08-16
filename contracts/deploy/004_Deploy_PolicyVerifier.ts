@@ -1,3 +1,3 @@
-import { simpleDeploy } from "@/contracts/utils/simpleDeploy"
+import { deploy } from "@/contracts/utils"
 
-export default simpleDeploy("Verifier")
+export default deploy("Verifier")

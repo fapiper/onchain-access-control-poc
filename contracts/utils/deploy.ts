@@ -4,7 +4,7 @@ import { HardhatRuntimeEnvironment } from "hardhat/types"
 type DeployOptions = Omit<_DeployOptions, "from">
 type DeployOptionsOrFn = ((hre: HardhatRuntimeEnvironment) => Promise<DeployOptions> | DeployOptions) | DeployOptions
 
-export function simpleDeploy(name: string, options?: DeployOptionsOrFn) {
+export function deploy(name: string, options?: DeployOptionsOrFn) {
 	const func: DeployFunction = async function (hre) {
 		const deployOptions = typeof options === "function" ? await options(hre) : options
 

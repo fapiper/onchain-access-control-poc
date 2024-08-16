@@ -4,7 +4,7 @@
 	"description": "",
 	"scripts": {
 		"compile": "hardhat compile",
-		"test": "hardhat contracts/test",
+		"test": "hardhat test",
 		"coverage": "hardhat coverage",
 		"deploy": "hardhat deploy",
 		"node": "hardhat node",
@@ -28,6 +28,7 @@
 		"@nomiclabs/hardhat-solhint": "^3.0.1",
 		"@openzeppelin/test-helpers": "^0.5.16",
 		"@typechain/hardhat": "^9.1.0",
+		"@types/mocha": "^10.0.7",
 		"@types/node": "^20.0.0",
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
@@ -44,6 +45,7 @@
 		"prettier-plugin-solidity": "^1.2.0",
 		"solhint": "^5.0.0",
 		"solidity-coverage": "^0.8.12",
+		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.2.2"
 	}
 }

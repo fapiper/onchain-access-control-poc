@@ -1,3 +1,4 @@
+import "tsconfig-paths/register"
 import { HardhatUserConfig } from "hardhat/config"
 import "@nomicfoundation/hardhat-chai-matchers"
 import "@nomicfoundation/hardhat-ethers"
@@ -13,10 +14,11 @@ import "hardhat-deploy-ethers"
 
 import "dotenv/config"
 
-import "./contracts/tasks/accounts"
-import "./contracts/tasks/balance"
-import "./contracts/tasks/block-number"
-import "./contracts/tasks/send-eth"
+import "@/contracts/tasks/accounts"
+import "@/contracts/tasks/balance"
+import "@/contracts/tasks/block-number"
+import "@/contracts/tasks/send-eth"
+import "@/contracts/tasks/use-case/register-did"
 
 const MAINNET_RPC_URL = process.env.MAINNET_RPC_URL || "https://eth-mainnet.g.alchemy.com/v2/your-api-key"
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/your-api-key"
@@ -33,6 +35,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 const config: HardhatUserConfig = {
 	defaultNetwork: "hardhat",
 	paths: {
+		deploy: "./contracts/deploy",
 		sources: "./contracts/src",
 		tests: "./contracts/test",
 		cache: "./cache",
@@ -81,8 +84,14 @@ const config: HardhatUserConfig = {
 			default: 0, // here this will by default take the first account as deployer
 			mainnet: 0, // similarly on mainnet it will take the first account as deployer.
 		},
-		owner: {
-			default: 0,
+		resourceOwner: {
+			default: 1,
+		},
+		resourceUser: {
+			default: 2,
+		},
+		accreditationBody: {
+			default: 3,
 		},
 	},
 	solidity: {
