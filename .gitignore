@@ -90,4 +90,4 @@ typechain-types
 __pycache__
 venv
 
-out/**
+src/**/out/**
