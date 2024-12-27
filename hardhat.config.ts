@@ -18,7 +18,8 @@ import "@/contracts/tasks/accounts"
 import "@/contracts/tasks/balance"
 import "@/contracts/tasks/block-number"
 import "@/contracts/tasks/send-eth"
-import "@/contracts/tasks/use-case/register-did"
+import "@/contracts/tasks/deploy-pdp"
+import "@/contracts/tasks/test-pdp"
 
 const MAINNET_RPC_URL = process.env.MAINNET_RPC_URL || "https://eth-mainnet.g.alchemy.com/v2/your-api-key"
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/your-api-key"
@@ -51,9 +52,11 @@ const config: HardhatUserConfig = {
 			// forking: {
 			//   url: MAINNET_RPC_URL
 			// }
+			allowUnlimitedContractSize: true,
 		},
 		localhost: {
 			url: "http://127.0.0.1:8545",
+			allowUnlimitedContractSize: true,
 		},
 		sepolia: {
 			url: SEPOLIA_RPC_URL,
@@ -100,6 +103,12 @@ const config: HardhatUserConfig = {
 				version: "0.8.20",
 			},
 		],
+		settings: {
+			optimizer: {
+				enabled: true,
+				runs: 1000,
+			},
+		},
 	},
 }
 

@@ -3,7 +3,7 @@ setup:
 	pip install -r requirements.txt
 
 clean:
-	rm -rf node_modules typechain-types artifacts cache
+	rm -rf typechain-types artifacts cache
 
 build:
 	pnpm compile
@@ -17,5 +17,8 @@ test:
 
 run:
 	sh ./use-case/01_did_registration.sh
+
+evaluate:
+	sh ./evaluate/run.sh
 
 .PHONY: setup test

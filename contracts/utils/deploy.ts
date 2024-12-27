@@ -12,13 +12,13 @@ export function deploy(name: string, options?: DeployOptionsOrFn) {
 		const { deployer } = await getNamedAccounts()
 		console.log("deploying", name, "with account", deployer, "...")
 		const chainId = await getChainId()
-		const { deploy } = deployments
+		const { deploy: hhDeploy } = deployments
 
 		if (!deployer) {
 			throw new Error("No deployer available")
 		}
 
-		const contract = await deploy(name, {
+		const contract = await hhDeploy(name, {
 			from: deployer,
 			log: true,
 			autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks

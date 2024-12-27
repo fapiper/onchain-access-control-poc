@@ -77,6 +77,12 @@ https://hardhat.org/guides/shorthand.html
 pnpm install
 ```
 
+With bash V3 the $(date +%s%N) command will return something like 1692824647N: and when you will try to calculate the different you will end up with 1692824647N: value too great for base error. In bash V4 this problem is solved, but if you still on bash 3 and you want to overcome this problem then it's better to use /usr/local/gnu/coreutils/bin/date library from GNU coreutils. On a mac you can easily install it with brew :
+
+```shell
+brew install coreutils
+```
+
 #### 2. Compile Contracts
 
 ```shell

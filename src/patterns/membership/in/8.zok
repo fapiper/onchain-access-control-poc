@@ -1,0 +1,57 @@
+// Based on: https://raw.githubusercontent.com/Zokrates/ZoKrates/a757921bad1bab80aafe2ac7c2caccab88feb9f7/zokrates_cli/examples/merkleTree/sha256PathProof3.zok
+
+import "hashes/sha256/512bitPadded" as sha256;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "signatures/verifyEddsa.code" as verifyEddsa;
+import "ecc/babyjubjubParams.code" as context;
+import "hashes/utils/256bitsDirectionHelper" as multiplex;
+
+const u32 DEPTH = 3;
+
+def select(bool condition, u32[8] left, u32[8] right) -> (u32[8], u32[8]) {
+	return (condition ? right : left, condition ? left : right);
+}
+
+// Merke-Tree inclusion proof for tree depth 4 using sha256
+// dir => true if current digest is on the rhs of the hash
+def exec(u32[8] leaf, u32[8] root, bool[DEPTH] dir, u32[DEPTH][8] path, field[2] R, field S, field[2] A, u32[8] M0, u32[8] M1) -> bool {
+
+    //Verify Signature (R,S) with PupKey (A) on Hash (M0, M1)
+    BabyJubJubParams context = context();
+    bool isVerified = verifyEddsa(R, S, A, M0, M1, context);
+    u32[8] h1 = sha256([0, 0, 0, 0, 0, 0, 0, 0], leaf);
+    bool isHash = h1 == M0;
+
+    // Start from the leaf
+    u32[8] mut digest = leaf;
+
+    // Loop up the tree
+    for u32 i in 0..DEPTH {
+        (u32[8], u32[8]) s = select(dir[i], digest, path[i]);
+        digest = sha256(s.0, s.1);
+    }
+
+    bool isMember = digest == root;
+
+    return isVerified && isHash && isMember;
+}
+
+def main(
+    private u32[8] leaf0, u32[8] root0, private bool[DEPTH] dir0, private u32[DEPTH][8] path0, private field[2] R0, private field S0, field[2] A0, u32[8] M00, u32[8] M10,
+    private u32[8] leaf1, u32[8] root1, private bool[DEPTH] dir1, private u32[DEPTH][8] path1, private field[2] R1, private field S1, field[2] A1, u32[8] M01, u32[8] M11,
+    private u32[8] leaf2, u32[8] root2, private bool[DEPTH] dir2, private u32[DEPTH][8] path2, private field[2] R2, private field S2, field[2] A2, u32[8] M02, u32[8] M12,
+    private u32[8] leaf3, u32[8] root3, private bool[DEPTH] dir3, private u32[DEPTH][8] path3, private field[2] R3, private field S3, field[2] A3, u32[8] M03, u32[8] M13,
+    private u32[8] leaf4, u32[8] root4, private bool[DEPTH] dir4, private u32[DEPTH][8] path4, private field[2] R4, private field S4, field[2] A4, u32[8] M04, u32[8] M14,
+    private u32[8] leaf5, u32[8] root5, private bool[DEPTH] dir5, private u32[DEPTH][8] path5, private field[2] R5, private field S5, field[2] A5, u32[8] M05, u32[8] M15,
+    private u32[8] leaf6, u32[8] root6, private bool[DEPTH] dir6, private u32[DEPTH][8] path6, private field[2] R6, private field S6, field[2] A6, u32[8] M06, u32[8] M16,
+    private u32[8] leaf7, u32[8] root7, private bool[DEPTH] dir7, private u32[DEPTH][8] path7, private field[2] R7, private field S7, field[2] A7, u32[8] M07, u32[8] M17
+) -> bool {
+    return exec(leaf0, root0, dir0, path0, R0, S0, A0, M00, M10) &&
+           exec(leaf1, root1, dir1, path1, R1, S1, A1, M01, M11) &&
+           exec(leaf2, root2, dir2, path2, R2, S2, A2, M02, M12) &&
+           exec(leaf3, root3, dir3, path3, R3, S3, A3, M03, M13) &&
+           exec(leaf4, root4, dir4, path4, R4, S4, A4, M04, M14) &&
+           exec(leaf5, root5, dir5, path5, R5, S5, A5, M05, M15) &&
+           exec(leaf6, root6, dir6, path6, R6, S6, A6, M06, M16) &&
+           exec(leaf7, root7, dir7, path7, R7, S7, A7, M07, M17);
+}

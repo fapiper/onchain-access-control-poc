@@ -1,0 +1,25 @@
+import "hashes/sha256/512bitPadded" as sha256;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "signatures/verifyEddsa.code" as verifyEddsa;
+import "ecc/babyjubjubParams.code" as context;
+
+const u32 LEN = 1;
+
+def exec<N>(u32[N][8] name, u32[N][8] value, field[N][2] R, field[N] S, field[N][2] A, u32[N][8] M0, u32[N][8] M1) -> bool {
+	bool mut result = true;
+    for u32 i in 0..N {
+    	BabyJubJubParams context = context();
+    	bool isVerified = verifyEddsa(R[i], S[i], A[i], M0[i], M1[i], context);
+
+        u32[8] h = sha256(name[i], value[i]);
+
+        bool isHash = h == M0[i];
+
+        result = isVerified && isHash;
+    }
+    return result;
+}
+
+def main(private u32[LEN][8] name, private u32[LEN][8] value, private field[LEN][2] R, private field[LEN] S, field[LEN][2] A, u32[LEN][8] M0, u32[LEN][8] M1) -> bool {
+    return exec(name, value, R, S, A, M0, M1);
+}
