@@ -1,10 +1,5 @@
 import { task } from "hardhat/config"
-import { deploy } from "@/contracts/utils"
-import * as fs from "node:fs"
-import * as path from "node:path"
-import { expect } from "chai"
 import { Verifier } from "@/typechain-types"
-import { ethers } from "ethers"
 
 task("test-pdp", "Test a generic pdp")
 	.addParam<string>("targetName", "A name of the contract")

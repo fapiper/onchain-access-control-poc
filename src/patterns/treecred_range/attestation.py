@@ -1,6 +1,6 @@
 import hashlib
 
-from src.utils import zok_out_u32, write_witness_for_cli, zok_hash, read_amount_from_cli
+from src.utils import zok_out_u32, write_witness_for_cli, zok_hash, read_amount_from_cli, write_treecred_witness_for_cli
 
 
 def main():
@@ -33,9 +33,9 @@ def main():
 
     direction = ["1", "0", "0"]
     path = l0 + [zok_out_u32(h1), zok_out_u32(h01)]
-    params = l1 + [zok_out_u32(root)] + direction + path
+    params = l1 + direction + path
 
-    write_witness_for_cli(msg, out + params, amount)
+    write_treecred_witness_for_cli(msg, [zok_out_u32(root)], out + params, amount)
 
 if __name__ == "__main__":
     main()

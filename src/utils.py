@@ -42,3 +42,19 @@ def write_witness_for_cli(msg: bytes, out, n = 1):
     out_n = out * n
 
     sys.stdout.write(" ".join(out_n))
+
+def write_treecred_witness_for_cli(msg: bytes, out_single, out, n = 1):
+    sk = PrivateKey.from_rand()
+
+    digest = hashlib.sha256(msg).digest()
+    digest += digest
+
+    sig = sk.sign(digest)
+    vk = PublicKey.from_private(sk)
+
+    out_n = [item for item in out for i in range(n)]
+
+    out_n += out_single
+    out_n.append(write_signature_for_zokrates_cli(vk, sig, digest))
+
+    sys.stdout.write(" ".join(out_n))
