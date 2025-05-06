@@ -27,6 +27,7 @@ jinja2 = "==3.0.3"
 markupsafe = "==2.1.1"
 werkzeug = "==2.0.3"
 zokrates-pycrypto = "==0.3.0"
+poseidon_py = "==0.1.5"
 
 [dev-packages]
 

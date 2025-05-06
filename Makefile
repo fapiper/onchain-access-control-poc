@@ -12,13 +12,10 @@ build-clean:
 	make clean
 	make build
 
-test:
-	echo "TODO test"
-
 run:
-	sh ./use-case/01_did_registration.sh
+	pnpm node
 
 evaluate:
 	sh ./evaluate/run.sh
 
-.PHONY: setup test
+.PHONY: setup evaluate

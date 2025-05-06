@@ -22,7 +22,7 @@ then
 	echo "condition type,amount,timestamp,gas (wei),witness_time (s),setup_time (s),prove_time (s),compiled_size (MB),proving_key_size (kB),verification_key_size (kB)" > $RESULTFILE
 fi
 
-declare -a patterns=("treecred_membership" "treecred_equality" "treecred_range")
+declare -a patterns=("treecred_equality" "treecred_range" "treecred_membership")
 declare -a amounts=(1 2 4 8 16)
 
 for PATTERN in "${patterns[@]}"

@@ -35,7 +35,7 @@ def main(u32[LEN] mins, u32[LEN] maxs, private u32[LEN][8] leaves, private bool[
     u32[8] h1 = sha256([0, 0, 0, 0, 0, 0, 0, 0], root);
     bool isHash = h1 == M0;
 
-    bool mut is_verified = true;
+    bool mut is_verified = false;
 
     for u32 i in 0..LEN {
         is_verified = is_verified && verify(mins[i], maxs[i], leaves[i], root, dirs[i], paths[i]);

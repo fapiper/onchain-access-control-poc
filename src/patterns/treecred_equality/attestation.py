@@ -1,7 +1,6 @@
 import hashlib
 
-from src.utils import zok_out_u32, write_witness_for_cli, zok_hash, read_amount_from_cli, write_treecred_witness_for_cli
-
+from src.utils import zok_out_u32, zok_hash, read_amount_from_cli, write_treecred_witness_for_cli
 
 def main():
     amount = read_amount_from_cli()
