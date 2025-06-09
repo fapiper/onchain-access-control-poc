@@ -1,0 +1,16 @@
+from "../../../utils.zok" import check_keybinding, check_compliant_membership, check_authentic;
+
+const u32 DEPTH = 3;
+
+def run_checks<N, D>(u32[N][8] membership_root, bool[N][D] membership_dir, u32[N][D][8] membership_path, u32[N][8] attr_key, u32[N][8] attr_value, field[N][2] R0, field[N] S0, field[N][2] A0, u32[N][8] M0, u32[N][8] M1, field[2] R1, field S1, field[2] A1, u32[8] N0, u32[8] N1) -> bool {
+    bool is_keybinding = check_keybinding(R1, S1, A1, N0, N1);
+    bool mut success = is_keybinding;
+
+    for u32 i in 0..N {
+        bool is_authentic = check_authentic(R0[i], S0[i], A0[i], M0[i], M1[i]);
+        bool is_compliant = check_compliant_membership(attr_value[i], membership_root[i], membership_dir[i], membership_path[i]);
+        success = success && is_authentic;
+    }
+
+    return success;
+}

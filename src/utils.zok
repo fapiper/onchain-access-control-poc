@@ -1,0 +1,43 @@
+import "hashes/sha256/512bitPadded" as sha256;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "signatures/verifyEddsa.code" as verifyEddsa;
+import "ecc/babyjubjubParams.code" as context;
+
+def select(bool condition, u32[8] left, u32[8] right) -> (u32[8], u32[8]) {
+	return (condition ? right : left, condition ? left : right);
+}
+
+def check_compliant_membership<N>(u32[8] leaf, u32[8] root, bool[N] dir, u32[N][8] path) -> bool {
+    u32[8] h1 = sha256([0, 0, 0, 0, 0, 0, 0, 0], leaf);
+
+    // Start from the leaf
+    u32[8] mut digest = leaf;
+
+    // Loop up the tree
+    for u32 i in 0..N {
+        (u32[8], u32[8]) s = select(dir[i], digest, path[i]);
+        digest = sha256(s.0, s.1);
+    }
+    log("leaf is {}, digest is {}, root is {}", leaf, digest, root);
+
+    return digest == root;
+}
+
+def check_compliant_range(u32 min, u32 max, u32[8] value) -> bool {
+    return min <= value[7] && max > value[7];
+}
+
+def check_keybinding(field[2] R, field S, field[2] A, u32[8] nonce0, u32[8] nonce1) -> bool {
+    BabyJubJubParams context = context();
+    return verifyEddsa(R, S, A, nonce0, nonce1, context);
+}
+
+def check_authentic(field[2] R, field S, field[2] A, u32[8] M0, u32[8] M1) -> bool {
+    BabyJubJubParams context = context();
+    return verifyEddsa(R, S, A, M0, M1, context);
+}
+
+def check_authentic_cp(u32[8] h0, u32[8] key, u32[8] value) -> bool {
+    u32[8] h = sha256(key, value);
+    return h == h0;
+}
