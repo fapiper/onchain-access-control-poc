@@ -19,9 +19,9 @@ def main():
     h00 = hashlib.sha256(h0 + h1).digest()
     h01 = hashlib.sha256(h2 + h3).digest()
 
-    membership_path = ["0", "0", "0", "0", "0", "0", "0", str(leaves[0])] + [zok_out_u32(h1), zok_out_u32(h01)]
+    membership_path = ["0 0 0 0 0 0 0" + " " + str(leaves[0]) + " " + zok_out_u32(h1) + " " + zok_out_u32(h01)]
     membership_root = zok_out_u32(hashlib.sha256(h00 + h01).digest())
-    membership_dir = ["1", "0", "0"]
+    membership_dir = ["1 0 0"]
 
     attr_key, attr_value = zok_attr(attr_key_bn, attr_value_bn)
 
