@@ -9,7 +9,7 @@ def run_checks<N, D>(u32[N][8] membership_root, bool[N][D] membership_dir, u32[N
     for u32 i in 0..N {
         bool is_authentic = check_authentic(R0[i], S0[i], A0[i], M0[i], M1[i]);
         bool is_compliant = check_compliant_membership(attr_value[i], membership_root[i], membership_dir[i], membership_path[i]);
-        success = success && is_authentic;
+        success = success && is_authentic && is_compliant;
     }
 
     return success;

@@ -1,43 +1,8 @@
-import "hashes/sha256/512bitPadded" as sha256;
-from "ecc/babyjubjubParams" import BabyJubJubParams;
-import "signatures/verifyEddsa.code" as verifyEddsa;
-import "ecc/babyjubjubParams.code" as context;
+from "./run_checks.zok" import run_checks;
 
-const u32 LEN = 1;
+const u32 N = 1;
 
-def exec<N>(field[2] pk, u32[N][8] key, u32[N][8] value, field[2] R, field S, field[2] A, u32[8] nonce0, u32[8] nonce1) -> bool {
-    bool is_keybinding = check_keybinding(R, S, A, nonce0, nonce1, context);
-
-	bool mut result = true;
-    for u32 i in 0..N {
-        u32[8] h = sha256(key[i], value[i]);
-
-        bool is_authentic = h == M0[i];
-
-        bool is_compliant = h == M0[i];
-
-        result = is_authentic && is_compliant;
-    }
-    return result && is_keybinding;
-}
-
-def check_keybinding(field[2] R, field S, field[2] A, u32[8] nonce0, u32[8] nonce1) -> bool {
-	BabyJubJubParams context = context();
-    return verifyEddsa(R, S, A, nonce0, nonce1, context);
-}
-
-def main(private u32[LEN][8] attr_key, private u32[LEN][8] attr_value, u32[LEN][8] hash0, u32[LEN][8] hash1, private field[LEN][2] R, private field[LEN] S, private field[LEN][2] A, u32[8] nonce0, u32[8] nonce1) -> bool {
-    bool is_keybinding = check_keybinding(R, S, A, nonce0, nonce1, context);
-
-	bool mut result = true;
-    for u32 i in 0..N {
-        u32[8] h = sha256(key[i], value[i]);
-
-        bool is_authentic = h == hash0[i];
-
-        bool is_compliant = h == hash0[i];
-
-        result = result && is_authentic && is_compliant;
-    }
-    return result && is_keybinding;
+def main(u32[N][8] C0, u32[N][8] C1, private u32[N][8] attr_key, private u32[N][8] attr_value, private field[2] R, private field S, private field[2] A, u32[8] N0, u32[8] N1) {
+    bool success = run_checks(C0, C1, attr_key, attr_value, R, S, A, N0, N1);
+    assert(success);
 }

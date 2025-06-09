@@ -1,18 +1,18 @@
-import struct
-from src.utils import write_witness_for_cli, read_amount_from_cli
-
+from src.utils import write_witness_for_cli, read_amount_from_cli, zok_attr, hash_attr
 
 def main():
-    amount = read_amount_from_cli()
+    n_times = read_amount_from_cli()
 
-    attribute = int.to_bytes(24, 64, "big")
-    value = int.to_bytes(19890519, 64, "big")
+    nonce = "3983795221"
 
-    msg = b"".join([p[-32:] for p in [attribute, value]])
+    attr_key_bn = int.to_bytes(9, 64, "big")
+    attr_value_bn = int.to_bytes(45054, 64, "big")
+    attr_key, attr_value = zok_attr(attr_key_bn, attr_value_bn)
 
-    params = [" ".join([str(i) for i in struct.unpack(">16I", attribute)][-8:]) for p in [attribute, value]]
+    out = [attr_key, attr_value]
+    msg = hash_attr(attr_key_bn, attr_value_bn)
 
-    write_witness_for_cli(msg, params, amount)
+    write_witness_for_cli(nonce, msg, out, n_times)
 
 if __name__ == "__main__":
     main()

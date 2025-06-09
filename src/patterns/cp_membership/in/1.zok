@@ -2,7 +2,7 @@ from "./run_checks.zok" import run_checks, DEPTH;
 
 const u32 N = 1;
 
-def main(u32[N][8] membership_root, bool[N][DEPTH] membership_dir, u32[N][DEPTH][8] membership_path, u32[N][8] h0, u32[N][8] h1, private u32[N][8] attr_key, private u32[N][8] attr_value, private field[2] R, private field S, private field[2] A, u32[8] nonce0, u32[8] nonce1) {
-    bool success = run_checks(membership_root, membership_dir, membership_path, h0, h1, attr_key, attr_value, R, S, A, nonce0, nonce1);
+def main(u32[N][8] membership_root, bool[N][DEPTH] membership_dir, u32[N][DEPTH][8] membership_path, u32[N][8] C0, u32[N][8] C1, private u32[N][8] attr_key, private u32[N][8] attr_value, private field[2] R, private field S, private field[2] A, u32[8] nonce0, u32[8] nonce1) {
+    bool success = run_checks(membership_root, membership_dir, membership_path, C0, C1, attr_key, attr_value, R, S, A, nonce0, nonce1);
     assert(success);
 }

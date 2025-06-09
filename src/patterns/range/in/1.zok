@@ -1,21 +1,8 @@
-import "hashes/sha256/512bitPadded" as sha256;
-from "ecc/babyjubjubParams" import BabyJubJubParams;
-import "signatures/verifyEddsa.code" as verifyEddsa;
-import "ecc/babyjubjubParams.code" as context;
+from "./run_checks.zok" import run_checks;
 
-def exec(u32 min, u32 max, u32[8] name, u32[8] value, field[2] R, field S, field[2] A, u32[8] M0, u32[8] M1) -> bool {
+const u32 N = 1;
 
-    BabyJubJubParams context = context();
-    bool isVerified = verifyEddsa(R, S, A, M0, M1, context);
-
-    u32[8] h = sha256(name, value);
-
-    bool isHash = h == M0;
-    bool inRange = min <= value[7] && max >= value[7];
-
-    return isVerified && isHash && inRange;
-}
-
-def main(u32 min0, u32 max0, private u32[8] name0, private u32[8] value0, private field[2] R0, private field S0, field[2] A0, u32[8] M00, u32[8] M10) -> bool {
-    return exec(min0, max0, name0, value0, R0, S0, A0, M00, M10);
+def main(u32[N] range_min, u32[N] range_max, private u32[N][8] attr_key, private u32[N][8] attr_value, private field[N][2] R0, private field[N] S0, private field[N][2] A0, u32[N][8] M0, u32[N][8] M1, private field[2] R1, private field S1, private field[2] A1, u32[8] N0, u32[8] N1) {
+    bool success = run_checks(range_min, range_max, attr_key, attr_value, R0, S0, A0, M0, M1, R1, S1, A1, N0, N1);
+    assert(success);
 }

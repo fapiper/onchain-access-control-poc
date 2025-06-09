@@ -1,11 +1,11 @@
 from "../../../utils.zok" import check_keybinding, check_compliant_range, check_authentic_cp;
 
-def run_checks<N>(u32[N] range_min, u32[N] range_max, u32[N][8] h0, u32[N][8] h1, u32[N][8] attr_key, u32[N][8] attr_value, field[2] R, field S, field[2] A, u32[8] nonce0, u32[8] nonce1) -> bool {
-    bool is_keybinding = check_keybinding(R, S, A, nonce0, nonce1);
+def run_checks<N>(u32[N] range_min, u32[N] range_max, u32[N][8] C0, u32[N][8] C1, u32[N][8] attr_key, u32[N][8] attr_value, field[2] R, field S, field[2] A, u32[8] N0, u32[8] N1) -> bool {
+    bool is_keybinding = check_keybinding(R, S, A, N0, N1);
     bool mut success = is_keybinding;
 
     for u32 i in 0..N {
-        bool is_authentic = check_authentic_cp(h0[i], attr_key[i], attr_value[i]);
+        bool is_authentic = check_authentic_cp(C0[i], attr_key[i], attr_value[i]);
         bool is_compliant = check_compliant_range(range_min[i], range_max[i], attr_value[i]);
         success = success && is_authentic && is_compliant;
     }

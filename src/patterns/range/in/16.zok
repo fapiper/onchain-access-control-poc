@@ -1,0 +1,8 @@
+from "./run_checks.zok" import run_checks;
+
+const u32 N = 16;
+
+def main(u32[N] range_min, u32[N] range_max, private u32[N][8] attr_key, private u32[N][8] attr_value, private field[N][2] R0, private field[N] S0, private field[N][2] A0, u32[N][8] M0, u32[N][8] M1, private field[2] R1, private field S1, private field[2] A1, u32[8] N0, u32[8] N1) {
+    bool success = run_checks(range_min, range_max, attr_key, attr_value, R0, S0, A0, M0, M1, R1, S1, A1, N0, N1);
+    assert(success);
+}
