@@ -42,8 +42,10 @@ We advances the state-of-the-art through a holistic approach, flexible proof mec
 To execute the experiments:
 
 ```bash
-cd evaluate && ./run.sh
+bash ./evaluate/run.sh
 ```
+
+This writes the results to `evaluate/result.csv`
 
 ### Troubleshooting
 
