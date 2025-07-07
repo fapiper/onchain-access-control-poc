@@ -1,5 +1,5 @@
 {
-	"name": "onchain-access-control-poc",
+	"name": "onchain-permissioning",
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
@@ -16,7 +16,6 @@
 		"lint:check": "eslint .",
 		"lint:fix": "eslint --fix ."
 	},
-	"author": "Fabian Piper <fabianpiper@web.de>",
 	"license": "MIT",
 	"dependencies": {
 		"@openzeppelin/contracts": "5.0.2"
