@@ -5,8 +5,8 @@ Existing permissioned DeFi solutions introduce centralized trust assumptions tha
 This paper presents a novel synthesis of Self-Sovereign Identity (SSI), Zero-Knowledge Proofs (ZKPs), and Attribute-Based Access Control to enable privacy-preserving on-chain permissioning based on decentralized policy decisions.
 We provide a comprehensive framework for permissioned dApps that aligns decentralized trust, privacy, and transparency harmonizing blockchain principles with regulatory compliance.
 Our framework supports multiple proof types (equality, range, membership, and time-dependent) with efficient proof generation through a commit-and-prove scheme that moves credential authenticity verification outside the ZKP circuit.
-Experimental evaluation of our KYC-compliant DeFi implementation shows considerable performance reduction for different proof types compared to baseline approaches.
-We advances the state-of-the-art through a holistic approach, flexible proof mechanisms addressing diverse real-world requirements, and optimized proof generation enabling practical deployment.
+Experimental evaluation of our KYC-compliant DeFi implementation shows considerable performance improvement for different proof types compared to baseline approaches.
+We advance the state-of-the-art through a holistic approach, flexible proof mechanisms addressing diverse real-world requirements, and optimized proof generation enabling practical deployment.
 
 ## Getting Started
 
