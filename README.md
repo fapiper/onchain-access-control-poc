@@ -39,6 +39,11 @@ We advances the state-of-the-art through a holistic approach, flexible proof mec
 
 ## Running Experiments
 
+Start your local hardhat network:
+```bash
+pnpm node
+```
+
 To execute the experiments:
 
 ```bash
